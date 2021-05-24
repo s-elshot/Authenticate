@@ -1,11 +1,10 @@
-import React, {Fragment, useContext} from 'react';
-import AuthContext from "../context/AuthContext";
+import React, { Fragment } from 'react';
+
 
 
 function Overview() {
 
-    const {authState} = useContext(AuthContext);
-    console.log(authState)
+
     return (
         <Fragment>
             <h2>Overview page</h2>

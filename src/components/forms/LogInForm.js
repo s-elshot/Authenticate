@@ -1,34 +1,36 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {useForm} from "react-hook-form";
 import './LogInForm.css';
 import axios from "axios";
-import {useHistory} from "react-router-dom";
+import {AuthContext} from "../../context/AuthContext";
+
 // import FormFieldComponent from "./FormFieldComponent";
 
 function LogInForm() {
 
     const {handleSubmit, register, pristine, formState: {errors}} = useForm({mode: "onBlur"});
     const [registerSucces, toggleRegisterSucces] = useState(false);
-    const history = useHistory();
+
+    const {logIn}= useContext(AuthContext);
 
     async function onSubmit(data) {
         try {
             const result = await axios.post("http://localhost:3000/login",data)
 
+            logIn(result.data.accessToken)
             // place jwt in local storage
-            localStorage.setItem("jwtToken",result.data.accessToken)
-            console.log(result);
-            console.log(result.data.accessToken);
+            // console.log(result);
+            // console.log(result.data.accessToken);
             toggleRegisterSucces(true)
             // no time-out: redirect immediately to new page
-            history.push('/profile');
+            // place jwt in local storage
 
         } catch (e) {
             console.error(e)
         }
 
 
-    };
+    }
 
 
     return (
@@ -52,11 +54,11 @@ function LogInForm() {
                                 }
                                 , minLength: {
                                     value: 2,
-                                    message: 'At least 2 characters must be used to define the first name',
+                                    message: 'At least 2 characters must be used to define the email',
                                 },
                                 maxLength: {
                                     value: 30,
-                                    message: 'At most 30 characters can be used to define the first name',
+                                    message: 'At most 30 characters can be used to define the email',
                                 }
                             })}
                         />
@@ -79,11 +81,11 @@ function LogInForm() {
                                 }
                                 , minLength: {
                                     value: 2,
-                                    message: 'At least 2 characters must be used to define the first name',
+                                    message: 'At least 2 characters must be used to define the password',
                                 },
                                 maxLength: {
                                     value: 30,
-                                    message: 'At most 30 characters can be used to define the first name',
+                                    message: 'At most 30 characters can be used to define the password',
                                 }
                             })}
                         />

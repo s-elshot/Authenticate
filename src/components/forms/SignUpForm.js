@@ -18,8 +18,8 @@ function SignUpForm() {
                     email: data.email,
                     // let op wat je vereist: als je alle velden vereist,
                     // moeten deze ook worden aangesproken voor aanmaak objecten
-                    // username: data.username,
-                    password: data.email,
+                    username: data.username,
+                    password: data.password,
                 })
             console.log(result);
             toggleRegisterSucces(true)
@@ -76,13 +76,13 @@ function SignUpForm() {
                         {errors.email && (<span id="signUpError">{errors.email.message}</span>)}
                     </label>
 
-                    <label htmlFor="userName">
+                    <label htmlFor="username">
                         <input type="text"
                                className="signUpField"
-                               name="userName"
-                               id="userName"
+                               name="username"
+                               id="username"
                                placeholder="Username"
-                               {...register('userName', {
+                               {...register('username', {
                                    required: {
                                        value: true,
                                        message: 'This field cant be empty',
@@ -97,7 +97,7 @@ function SignUpForm() {
                                    },
                                })}
                         />
-                        {errors.userName && (<span id="signUpError">{errors.userName.message}</span>)}
+                        {errors.username && (<span id="signUpError">{errors.username.message}</span>)}
                     </label>
 
                     <label htmlFor="password">
