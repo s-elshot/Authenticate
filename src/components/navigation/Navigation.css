@@ -1,0 +1,102 @@
+/*.navContainer {*/
+/*    margin: 0;*/
+/*}*/
+
+.navBarUl {
+    display: flex;
+    padding: 2px 33px 2px 5px;
+    justify-content: space-evenly;
+    /*padding: 5px;*/
+    width: 100%;
+    /*text-transform: uppercase;*/
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.navUl {
+    display: flex;
+    flex-direction: row;
+    background-color: #efecec;
+
+    border: none;
+    list-style-type: none;
+    border-radius: 15px;
+    padding: 0 10px;
+    margin: 0 10px;
+    width: 1600px;
+    font-family: "Segoe UI", serif;
+    font-size: smaller;
+
+}
+
+
+.navBarUl {
+
+    padding: 1px 10px;
+    margin: 1px 10px;
+
+
+}
+
+.navBarUl:hover {
+    text-decoration: none;
+    border-radius: 30px;
+    transition: ease-in .7s;
+    background-color: black;
+    text-decoration: none;
+
+
+}
+
+/*.navBarUl:focus {*/
+/*    border-radius: 30px;*/
+
+/*    background-color: black;*/
+/*    text-decoration: none;*/
+
+/*}*/
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+a:focus {
+    text-decoration: none;
+    font-weight: bold;
+    align-content: center;
+
+
+}
+
+
+/*.activeLink {*/
+/*    text-decoration: none;*/
+/*    color: black;*/
+/*}*/
+
+/*.activeLink {*/
+/*    text-decoration: none;*/
+/*    color: white;*/
+/*}*/
+
+
+
+
+
+
+
+
+
+
