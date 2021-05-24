@@ -33,7 +33,7 @@ function Navigation() {
                     {signedIn === true
                         ? <>
                             <li className="navBarUl">
-                                <NavLink to="/guildOverview" activeClassName="active-link">GUILD OVERVIEW PAGE</NavLink>
+                                <NavLink to="/profile" activeClassName="active-link">PROFILE PAGE</NavLink>
                             </li>
                             <li className="navBarUl">
                                 <NavLink to="/guilderShop" activeClassName="active-link">GUILDERS PRIVATE SHOP</NavLink>

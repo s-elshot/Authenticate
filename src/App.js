@@ -11,20 +11,21 @@ import ShoppingCart from "./pages/ShoppingCart";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Navigation from "./components/navigation/Navigation";
-import GuildOverview from "./pages/GuildOverview";
+import Profile from "./pages/Profile";
 import SignUpCustomer from "./pages/SignUpCustomer";
 import SignUpGuilder from "./pages/SignUpGuilder";
-import UserContextProvider from "./context/UserContext";
+
 
 
 function App() {
 
-    const data = {}
+
 
 
     return (
 
-            <UserContextProvider value={data}>
+            // <UserContextProvider value={data}>
+        <>
                 <nav>
                     <Navigation/>
                 </nav>
@@ -50,8 +51,8 @@ function App() {
                         <GuilderShop/>
                     </Route>
 
-                    <Route path={"/guildOverview"}>
-                        <GuildOverview/>
+                    <Route path={"/profile"}>
+                        <Profile/>
                     </Route>
 
                     <Route exact path={"/shoppingCart"}>
@@ -76,9 +77,9 @@ function App() {
                     </Route>
 
                 </Switch>
-            </UserContextProvider>
+            {/*</UserContextProvider>*/}
 
-
+    </>
     )
 }
 

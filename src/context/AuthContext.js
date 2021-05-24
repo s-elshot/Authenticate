@@ -36,12 +36,38 @@ function AuthContextProvider({children}) {
         status: 'pending',
     })
 
+    async function fetchUserData(){
+
+    }
+
     useEffect(()=>{
+
+
         // is er een token?
+        const token = localStorage.getItem('jwtToken')
+
+        const decoded= jwt_decode(token)
+        const userId = decoded.sub
+
+
+
+        if (token !== null && authState.user === null){
+
+
+        } else{
+            setAuthState({
+                user:null,
+                status: 'done',
+            })
+        }
+
+
         // is er geen user?
         // get data (zoals bij login)
         // if not, no user but status "done"
+
     },[])
+
 
     // check if there's a token present, and if it's present, but no user,
     // get userdata
@@ -81,7 +107,7 @@ function AuthContextProvider({children}) {
                     // item isn't loading anymore
                     status: 'done'
                 });
-                history.push('/guildOverview');
+                history.push('/profile');
 
             } catch (e){
                 console.error(e)
@@ -110,8 +136,6 @@ function AuthContextProvider({children}) {
                 ? children
                 : <p>Loading..</p>
             }
-            {children}
-
         </AuthContext.Provider>
     )
 }
