@@ -1,6 +1,6 @@
 import React, {createContext, useEffect, useState} from 'react'
 import {useHistory} from "react-router-dom";
-import  jwt_decode from 'jwt-decode'
+import jwt_decode from 'jwt-decode'
 import axios from "axios";
 //  CONTEXT
 // 1. context maken met createContext
@@ -31,106 +31,74 @@ function AuthContextProvider({children}) {
     const history = useHistory();
 
     // state gebruikersdata
-    const [authState, setAuthState]  = useState({
+    const [authState, setAuthState] = useState({
         user: null,
         status: 'pending',
     })
 
-    async function fetchUserData(){
+    async function fetchUserData(jwtToken) {
 
-    }
+        const decoded = jwt_decode(jwtToken);
+        const userId = decoded.sub;
 
-    useEffect(()=>{
+        try {
 
-
-        // is er een token?
-        const token = localStorage.getItem('jwtToken')
-
-        const decoded= jwt_decode(token)
-        const userId = decoded.sub
-
-
-
-        if (token !== null && authState.user === null){
-
-
-        } else{
-            setAuthState({
-                user:null,
-                status: 'done',
-            })
-        }
-
-
-        // is er geen user?
-        // get data (zoals bij login)
-        // if not, no user but status "done"
-
-    },[])
-
-
-    // check if there's a token present, and if it's present, but no user,
-    // get userdata
-
-    // inlogfunctie
-    async function logIn(jwtToken) {
-        // console.log(jwtToken)
-        // we hebben hier de JWT token nodig en
-        // daaruit de user-id te halen
-        // JWT token in local storage zetten
-        // Gebruikersdata ophalen
-        // Die data gebruiken om context te vullen
-        // Doorlinken naar de profielpagina
-        const decoded= jwt_decode(jwtToken)
-        // get jwt-token specific for userId
-        const userId = decoded.sub
-        // store jwt-token in local storage
-        localStorage.setItem("jwtToken",jwtToken)
-
-
-            try {
-
-                const result = await  axios.get(`http://localhost:3000/600/users/${userId}`,{
-                headers:{
+            const result = await axios.get(`http://localhost:3000/600/users/${userId}`, {
+                headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${jwtToken}`,
                 }
             })
-                console.log(result);
-
-                setAuthState({
-                    user: {
-                        email: result.data.email,
-                        username: result.data.username,
-                        id: result.data.id
-                    },
-                    // item isn't loading anymore
-                    status: 'done'
-                });
-                history.push('/profile');
-
-            } catch (e){
-                console.error(e)
-            }
+            setAuthState({
+                user: {
+                    email: result.data.email,
+                    username: result.data.username,
+                    id: result.data.id
+                },
+                status: 'done'
+            });
+        } catch (e) {
+            console.error(e)
         }
-
-    //
-    // }
-
-    // uitlogfunctie
-    function logOut(){
-        console.log("logOut!")
     }
 
-    // omdat authstate een object is en we nog steeds gebruik willen
-    // maken van de automatische state-update, zullen we de authState "spreaden"
+    useEffect(() => {
+        // is er een token?
+        const token = localStorage.getItem('jwtToken');
+
+        if (token !== undefined && authState.user === null) {
+            fetchUserData(token);
+
+        } else {
+            setAuthState({
+                user: null,
+                status: 'done',
+            })
+        }
+    }, [])
+
+
+
+    async function logIn(jwtToken) {
+        localStorage.setItem("jwtToken", jwtToken);
+        fetchUserData(jwtToken);
+        history.push('/profile');
+    }
+
+
+    function logOut() {
+        localStorage.setItem("jwtToken", null);
+        history.push('/logIn');
+    }
+
     const data = {
         ...authState,
         logIn: logIn,
         logOut: logOut,
 
     }
-    return(
+
+    return (
         <AuthContext.Provider value={data}>
             {authState.status === 'done'
                 ? children

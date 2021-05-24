@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 
 function Profile() {
 
-    const {user}= useContext(AuthContext);
+    const {user,logOut}= useContext(AuthContext);
     // console.log("Profile?")
     // console.log(user);
 
@@ -16,6 +16,7 @@ function Profile() {
             <h2>Profile</h2>
             <p><strong>Username:</strong> {user && user.username}</p>
             <p><strong>Email:</strong> {user && user.email}</p>
+            <button onClick={logOut}>LOG OUT</button>
         </Fragment>
     );
 }
