@@ -7,6 +7,7 @@ import React, {createContext, useState} from 'react'
 // - geef eem data object mee in de provider
 // - state
 // 3. Wikkelen de provider om <App> heen in index.js
+// 4. Test context door een component aan te melden met useContext
 
 // AUTHENTICATIE
 
@@ -34,8 +35,8 @@ function AuthContextProvider({children}) {
     function logIn(){
         console.log("logIn!")
     }
-    // uitlogfunctie
 
+    // uitlogfunctie
     function logOut(){
         console.log("logOut!")
     }
